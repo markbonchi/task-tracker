@@ -125,7 +125,7 @@ const updateStatus = (identifier, status) => {
     if (identifier !== taskInstances[i].id) continue; // if i is not equal to identifier skip
 
     if (status === taskInstances[i].status)
-      return console.log("Looks the same to me");
+      return console.log("Already marked in-progress");
 
     // make the necessary updates
     taskInstances[i].setStatus(status);
@@ -133,8 +133,6 @@ const updateStatus = (identifier, status) => {
 
     break;
   }
-
-  console.log(taskInstances);
 
   saveJsonFile(taskInstances);
 };

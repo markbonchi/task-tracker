@@ -47,5 +47,12 @@
         "status": "todo",
         "createdAt": "2026-01-12T20:28:19.080Z",
         "updatedAt": "2026-01-12T20:28:19.080Z"
+    },
+    {
+        "id": 8,
+        "description": "Learn how to deploy a cli app",
+        "status": "in-progress",
+        "createdAt": "2026-01-13T10:43:44.347Z",
+        "updatedAt": "2026-01-13T10:47:16.780Z"
     }
 ]

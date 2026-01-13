@@ -1,5 +1,5 @@
 {
-  "name": "task-tracker",
+  "name": "task-cli",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "bin": {
+    "task-cli": "./index.js"
+  },
   "dependencies": {
     "commander": "^14.0.2"
   }

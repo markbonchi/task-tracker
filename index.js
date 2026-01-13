@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Command } from "commander";
 import {
   addItem,
@@ -63,6 +65,7 @@ program
 program
   .command("mark-in-progress")
   .argument("<ID>", "ID of the target task", checkInt)
+  .description("Update status  of targeted task to 'in-progress'")
   .action((identifier) => {
     updateStatus(identifier, status_list[1]);
   });
@@ -70,6 +73,7 @@ program
 program
   .command("mark-done")
   .argument("<ID>", "ID of the target task", checkInt)
+  .description("update status  of targeted task to 'done'")
   .action((identifier) => {
     updateStatus(identifier, status_list[2]);
   });
