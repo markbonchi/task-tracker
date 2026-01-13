@@ -6,8 +6,9 @@ import {
   deleteItem,
   listAllTasks,
   updateItem,
+  updateStatus,
 } from "./utils/handle_task.js";
-import { Tasks } from "./lib/tasks.js";
+import { Tasks, status_list } from "./lib/tasks.js";
 import { error } from "node:console";
 import { describe } from "node:test";
 
@@ -41,9 +42,13 @@ program
 
 program
   .command("list")
+  .argument(
+    "[status]",
+    "List tasks according to  their status; todo, in-progress, done"
+  )
   .description("gives a list of the tasks and ID")
-  .action(() => {
-    listAllTasks();
+  .action((status) => {
+    listAllTasks(status);
   });
 
 program
@@ -60,15 +65,21 @@ program
   .argument("<description>", "updated description for the identified task")
   .description("update targeted task from list using ID")
   .action((ID, description) => {
-    // console.log(`handle update  ID: ${ID}, Description: "${description}"`);
     updateItem(ID, description);
   });
 
-program.command("mark-in-progress");
+program
+  .command("mark-in-progress")
+  .argument("<ID>", "ID of the target task", checkInt)
+  .action((identifier) => {
+    updateStatus(identifier, status_list[1]);
+  });
 
-program.command("mark-done");
-
-// createJsonFile();
-// console.log(outputFilePath);
+program
+  .command("mark-done")
+  .argument("<ID>", "ID of the target task", checkInt)
+  .action((identifier) => {
+    updateStatus(identifier, status_list[2]);
+  });
 
 program.parse();

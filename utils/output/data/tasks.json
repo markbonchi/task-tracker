@@ -16,9 +16,9 @@
     {
         "id": 4,
         "description": "Think about the next problems which are updateing and statuse settings",
-        "status": "todo",
+        "status": "done",
         "createdAt": "2026-01-12T09:02:07.140Z",
-        "updatedAt": "2026-01-12T09:02:07.140Z"
+        "updatedAt": "2026-01-13T07:19:02.256Z"
     },
     {
         "id": 5,
@@ -33,5 +33,19 @@
         "status": "todo",
         "createdAt": "2026-01-12T09:52:37.102Z",
         "updatedAt": "2026-01-12T19:25:20.621Z"
+    },
+    {
+        "id": 3,
+        "description": "Implement command and prepare to deploy project",
+        "status": "in-progress",
+        "createdAt": "2026-01-12T20:25:18.649Z",
+        "updatedAt": "2026-01-13T07:18:43.291Z"
+    },
+    {
+        "id": 7,
+        "description": "Do not forget to take notes about obstacles",
+        "status": "todo",
+        "createdAt": "2026-01-12T20:28:19.080Z",
+        "updatedAt": "2026-01-12T20:28:19.080Z"
     }
 ]

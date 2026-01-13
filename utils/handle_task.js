@@ -1,4 +1,4 @@
-import { Tasks } from "../lib/tasks.js";
+import { Tasks, status_list } from "../lib/tasks.js";
 import { loadJsonFile, saveJsonFile } from "./handle_output.js";
 
 const createTask = (description, taskInstances) => {
@@ -49,17 +49,26 @@ const addItem = (description) => {
   // adding new task
   let newTask = createTask(description, taskInstances);
   taskInstances.push(newTask);
-  console.log(taskInstances);
+
+  // console.log(taskInstances);
   saveJsonFile(taskInstances);
   return newTask;
 };
 
 // display all avaliable tasks on the list including their unique identifiers
-const listAllTasks = () => {
+const listAllTasks = (status) => {
   const fileData = loadJsonFile();
 
   if (fileData.length === 0) return console.log("Nothing to do yet");
   // console.log(fileData);
+
+  if (status) {
+    for (let i = 0; i < fileData.length; i++) {
+      if (status === fileData[i].status)
+        console.log(`${fileData[i].description} (ID: ${fileData[i].id})`);
+    }
+    return status;
+  }
   for (let i = 0; i < fileData.length; i++) {
     console.log(`${fileData[i].description} (ID: ${fileData[i].id})`);
   }
@@ -116,4 +125,44 @@ const updateItem = (identifier, newDescription) => {
   saveJsonFile(taskInstances);
 };
 
-export { createTask, addItem, listAllTasks, deleteItem, updateItem };
+const updateStatus = (identifier, status) => {
+  const fileData = loadJsonFile();
+
+  const availableID = fileData.map((item) => item.id); // create list of available indexes in fileData
+  if (!availableID.includes(identifier))
+    // chacking if unique identifier exists
+    return console.log("No such task exists");
+
+  // recreate lists of instances for better navigation and data manipulation
+  const taskInstances = fileData.map((item) => {
+    if (!item.description || !item.id || !item.status) return item;
+    return Tasks.fromJson(item);
+  });
+
+  for (let i = 0; i < taskInstances.length; i++) {
+    if (identifier !== taskInstances[i].id) continue; // if i is not equal to identifier skip
+
+    if (status === taskInstances[i].status)
+      return console.log("Looks the same to me");
+
+    // make the necessary updates
+    taskInstances[i].setStatus(status);
+    taskInstances[i].setUpdatedAt(new Date().toISOString);
+    // console.log(taskInstances[i]);
+    break;
+  }
+
+  console.log(taskInstances);
+  // console.log(fileData);
+
+  saveJsonFile(taskInstances);
+};
+
+export {
+  createTask,
+  addItem,
+  listAllTasks,
+  deleteItem,
+  updateItem,
+  updateStatus,
+};
