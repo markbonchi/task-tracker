@@ -1,4 +1,4 @@
-import { Tasks, status_list } from "../lib/tasks.js";
+import { Tasks, status_icon, status_list } from "../lib/tasks.js";
 import { loadJsonFile, saveJsonFile } from "./handle_output.js";
 
 const createTask = (description, taskInstances) => {
@@ -51,12 +51,18 @@ const listAllTasks = (status) => {
   if (status) {
     for (let i = 0; i < fileData.length; i++) {
       if (status === fileData[i].status)
-        console.log(`${fileData[i].description} (ID: ${fileData[i].id})`);
+        console.log(
+          `${status_icon[status]}   ${fileData[i].description} (ID: ${fileData[i].id})`
+        );
     }
     return status;
   }
   for (let i = 0; i < fileData.length; i++) {
-    console.log(`${fileData[i].description} (ID: ${fileData[i].id})`);
+    console.log(
+      `${status_icon[fileData[i].status]}   ${fileData[i].description} (ID: ${
+        fileData[i].id
+      })`
+    );
   }
 };
 
