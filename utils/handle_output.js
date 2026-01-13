@@ -2,25 +2,27 @@ import fs from "node:fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
-//Define file output directory
+// Define file output directory
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const outputDir = join(__dirname, "output", "data");
 const outputFilePath = join(outputDir, "tasks.json");
 
-//ensures directory exists (optional but recommended)
+// Ensures directory exists (optional but recommended)
 fs.mkdirSync(outputDir, { recursive: true });
 
+// Saves JSON object to JSON file
 const saveJsonFile = (json = []) => {
   let jsonData = JSON.stringify(json, null, 4);
   fs.writeFileSync(outputFilePath, jsonData);
-  // console.log("Saved");
 };
 
+// Validates presence of output file
 const validatefile = (path) => {
   if (!fs.existsSync(path)) return false;
   return true;
 };
 
+// Loads JSON object from JSON file
 const loadJsonFile = () => {
   if (!validatefile(outputFilePath)) saveJsonFile();
   const data = fs.readFileSync(outputFilePath, "utf-8");

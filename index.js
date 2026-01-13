@@ -1,6 +1,4 @@
-import fs from "node:fs";
 import { Command } from "commander";
-import { saveJsonFile, outputFilePath } from "./utils/handle_output.js";
 import {
   addItem,
   deleteItem,
@@ -9,12 +7,6 @@ import {
   updateStatus,
 } from "./utils/handle_task.js";
 import { Tasks, status_list } from "./lib/tasks.js";
-import { error } from "node:console";
-import { describe } from "node:test";
-
-// const test_data = [{ test: "data", type: "jsonstringify", id: "number" }];
-
-// const jsonData = JSON.stringify(test_data, null, 4);
 
 const program = new Command();
 

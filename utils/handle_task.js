@@ -6,7 +6,6 @@ const createTask = (description, taskInstances) => {
   const newTask = new Tasks(description);
   if (taskInstances.length !== 0) {
     const availableID = taskInstances.map((item) => item.id);
-    // console.log(availableID.sort((a, b) => a - b));
 
     // If length of list is less than the last ID value indicating a missing number in the middle
     if (taskInstances.length < availableID[taskInstances.length - 1]) {
@@ -14,11 +13,9 @@ const createTask = (description, taskInstances) => {
       for (let i = 1; i < availableID[taskInstances.length - 1]; i++) {
         if (availableID.includes(i)) {
           // If current value of i is in the list of indexes move on to the next
-          // console.log(`in: ${i}`);
           continue;
         } else {
           // else set as unique ID of the new task instance and break the loop
-          // console.log(i);
           newTask.setId(i);
           break;
         }
@@ -28,14 +25,6 @@ const createTask = (description, taskInstances) => {
   return newTask;
 };
 
-// Tried to handle repititions (didn't work out) but primary features work fine
-// const validatingTask = (description, jsonObject) => {
-//   for (let item in jsonObject) {
-//     if (description === item.description) return true;
-//   }
-//   return false;
-// };
-
 const addItem = (description) => {
   let fileData = loadJsonFile();
 
@@ -44,13 +33,11 @@ const addItem = (description) => {
     if (!item.description || !item.id || !item.status) return item;
     return Tasks.fromJson(item);
   });
-  // console.log(taskInstances);
 
   // adding new task
   let newTask = createTask(description, taskInstances);
   taskInstances.push(newTask);
 
-  // console.log(taskInstances);
   saveJsonFile(taskInstances);
   return newTask;
 };
@@ -60,7 +47,6 @@ const listAllTasks = (status) => {
   const fileData = loadJsonFile();
 
   if (fileData.length === 0) return console.log("Nothing to do yet");
-  // console.log(fileData);
 
   if (status) {
     for (let i = 0; i < fileData.length; i++) {
@@ -80,7 +66,6 @@ const deleteItem = (identifier) => {
   const fileData = loadJsonFile();
 
   const availableID = fileData.map((item) => item.id); // create list of available indexes in fileData
-  // console.log(availableID);
 
   if (!availableID.includes(identifier)) return console.log("No such task"); // if identifier is not in the available index list
 
@@ -117,11 +102,8 @@ const updateItem = (identifier, newDescription) => {
     // make the necessary updates
     taskInstances[i].setDescription(newDescription);
     taskInstances[i].setUpdatedAt(new Date().toISOString);
-    // console.log(taskInstances[i]);
     break;
   }
-  // console.log(taskInstances);
-  // console.log(fileData);
   saveJsonFile(taskInstances);
 };
 
@@ -148,12 +130,11 @@ const updateStatus = (identifier, status) => {
     // make the necessary updates
     taskInstances[i].setStatus(status);
     taskInstances[i].setUpdatedAt(new Date().toISOString);
-    // console.log(taskInstances[i]);
+
     break;
   }
 
   console.log(taskInstances);
-  // console.log(fileData);
 
   saveJsonFile(taskInstances);
 };
