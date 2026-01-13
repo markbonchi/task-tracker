@@ -21,7 +21,7 @@ const checkInt = (value) => {
 };
 program
   .name("Task Tracker")
-  .description("CLI to mange tasks and tod lists")
+  .description("CLI task manager to manage tasks and todo lists")
   .version("1.0.0");
 
 program
