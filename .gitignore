@@ -6,4 +6,7 @@ node_modules
 
 test.*
 
+utils/output/data/task.json
+
+
 .npmignore
